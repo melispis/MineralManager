@@ -1,0 +1,92 @@
+.header-homepage {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.page-top-section {
+    margin-bottom: 5%;
+}
+
+.get-started {
+    width: 150px;
+    background-color: #d0ebf4;
+    color: #000;
+    border-color: #fff;
+}
+
+.svg-container {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    margin-bottom: 9px;
+    fill: #000;
+    opacity: 0.9;
+  }
+
+.scroll-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 10%;
+  }
+
+  .scroll-text {
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 10px;
+  }
+
+  .chevron {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .fa-chevron-down {
+    font-size: 24px;
+    color: #000;
+  }
+
+  .pointer {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.text-decoration-none {
+  text-decoration: none;
+  list-style-type: none;
+  padding-left: 0px;
+  }
+
+.image-container {
+    position: relative;
+}
+
+.card-body.view-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+}
+
+.image-container:hover .card-body.view-image {
+    opacity: 1;
+}

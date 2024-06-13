@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block main %}
+
+{% if get_flashed_messages() %}
+<div class="alert alert-info mb-0 text-center" role="alert" style="margin-bottom: 1rem;">
+    {{ get_flashed_messages() | join(" ") }}
+</div>
+{% endif %}
+
+{% if not collection %}
+<h4 class="text-muted">Nothing here yet!</h4>
+{% else %}
+<div class="row">
+    <div>
+        <h3>Your Collections</h3>
+    </div>
+    <div class="col text-end"><a href="/new_collection" class="btn btn-primary my-2">+ Add</a></div>
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for i in range(collection|length) %}
+    {% set album = collection[i] %}
+    {% set image = album_images[i] %}
+    <div class="col">
+        <h4>{{ album['title'] }}</h4>
+        <div class="card shadow-sm">
+            {% if image %}
+            <img src="{{ url_for('static', filename='uploads/' + image) }}"
+                class="object-fit-cover bd-placeholder-img card-img-top" width="100%" height="225">
+            {% else %}
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="white"></rect><text x="35%" y="50%" fill="grey" dy=".3em">Collection empty</text>
+            </svg>
+            {% endif %}
+            <div class="card-body">
+                <p class="card-text">{{ album['description'] }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a href="/view-collection/{{ album['id'] }}"><button type="button"
+                                class="btn btn-sm btn-outline-secondary">View</button></a>
+                        <a href="/delete-collection/{{ album['id'] }}"
+                            onclick="return confirm('Are you sure you want to delete this collection?')">
+                            <button type="button" class="btn btn-sm btn-outline-danger delete-button" id="delete-button"
+                                data-collection-id="{{ collection['id'] }}">Delete</button>
+                        </a>
+                    </div>
+                    <small class="text-muted">{{ album['image_count'] }} items</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
+<section class="text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h2>Manage your collections</h2>
+            <p class="text-muted">Make and edit collections of your favorite gems and minerals. Or other stuff if you
+                like!</p>
+            <p>
+                <a href="/new_collection" class="btn btn-primary my-2">Make a new collection</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

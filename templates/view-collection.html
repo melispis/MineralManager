@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Collection Details
+{% endblock %}
+
+{% block main %}
+{% if get_flashed_messages() %}
+<div class="alert alert-info mb-0 text-center" role="alert" style="margin-bottom: 1rem;">
+    {{ get_flashed_messages() | join(" ") }}
+</div>
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div>
+            <h3>Collection: {{ name }}</h3>
+        </div>
+        <p>{{ description }}</p>
+        <div class="col text-end">
+            <a href="/edit-collection/{{ collection[0]['id'] }}"><button type="button"
+                    class="btn btn-primary my-2">Edit</button></a>
+            <a href="/add-images/{{ collection[0]['id'] }}"><button type="button" class="btn btn-primary my-2">+
+                    Add</button></a>
+        </div>
+    </div>
+
+    {% if images %}
+    <div class="row row-cols-2 row-cols-md-3 g-3">
+        {% for image in images %}
+        <div class="col">
+            <div class="card shadow-sm view-image">
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='uploads/' + image.filename) }}"
+                        class="object-fit-cover card-img-top" alt="Image" width="100%" height="300">
+                    <div class="card-body view-image">
+                        <p class="card-text">{{ image['title'] }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="/view-image/{{ image['id'] }}"><button type="button"
+                                        class="btn btn-sm btn-outline-secondary">View details</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h3 class="text-muted">No items in collection</h3>
+    {% endif %}
+</div>
+{% endblock %}

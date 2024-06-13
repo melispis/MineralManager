@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Settings
+{% endblock %}
+
+{% block main %}
+{% if get_flashed_messages() %}
+<div class="alert alert-info mb-0 text-center" role="alert" style="margin-bottom: 1rem;">
+  {{ get_flashed_messages() | join(" ") }}
+</div>
+{% endif %}
+<div class="row align-items-md-stretch">
+  <div class="col-md-6">
+    <div class="h-100 p-5 bg-light border rounded-3">
+      <h2>Logged in as {{ username }}</h2>
+      <div class="profile-picture">
+        {% if profile_picture %}
+        <img src="{{ url_for('static', filename='uploads/' + profile_picture) }}" alt="Profile Picture"
+          class="object-fit-cover" width="150" height="150">
+        {% else %}
+        <img src="{{ url_for('static', filename='user.png') }}" alt="Default Profile Picture" width="150" height="150">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="h-100 p-5 bg-light border rounded-3">
+      <h2>Upload new profile picture</h2>
+      <form method="POST" enctype=multipart/form-data>
+        <ul class="text-decoration-none">
+          <li><input type=file name="profile_picture" id="profile_picture"></li>
+          <li class="mt-2"><input class="btn btn-primary" type=submit value=Upload></li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="p-5 mt-4 bg-light border rounded-3">
+  <p class="col-md-8 fs-4">
+  <h2>Change Password</h2>
+  <form action="/change_password" method="post">
+    <div class="mb-3">
+      <input autocomplete="off" class="form-control mx-auto w-auto" name="current_password"
+        placeholder="Current Password" type="password">
+    </div>
+    <div class="mb-3">
+      <input class="form-control mx-auto w-auto" id="password" name="new_password" placeholder="New Password"
+        type="password">
+    </div>
+    <div class="mb-3">
+      <input class="form-control mx-auto w-auto" name="confirm_password" placeholder="Confirm Password" type="password">
+    </div>
+    <button class="btn btn-primary" type="submit">Change</button>
+  </form>
+  </p>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Edit collection
+{% endblock %}
+
+{% block main %}
+<div class="col-xl-12 col-xxl-12 px-4">
+  <div class="row align-items-center g-lg-5">
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 p-md-5 border rounded-3 bg-light" action="/edit-collection/{{ collection_id }}" method="post"
+        enctype=multipart/form-data>
+        <h2>Edit collection</h2>
+        <div class="form-floating mb-3" style="margin-top: 1rem;">
+          <input type="text" class="form-control" id="floatingInput" name="new_title" placeholder="Change Title">
+          <label for="floatingInput">Change Title</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="new_description"
+            placeholder="Change Description">
+          <label for="floatingPassword">Change Description</label>
+        </div>
+        <div>
+          <h6 class="text-muted">Change title and/or description of your collection</h6>
+          <button type="submit" class="btn btn-primary">Confirm</button>
+        </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+
+
+{% endblock %}

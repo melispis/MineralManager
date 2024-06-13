@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block main %}
+<div class="page-top-section border-bottom">
+  <div class="header-homepage">
+    <h1 class="display-5 fw-bolder lh-1 mb-3">Keep track of your personal mineral collection with MineralManager!</h1>
+  </div>
+
+  {% if session["id"] %}
+  <div class="mb-5">
+    <a href="/new_collection" class="btn btn-primary my-2">Make a new collection</a>
+    <a href="/settings" class="btn btn-primary my-2">Go to profile</a>
+  </div>
+  {% else %}
+  <a href="/#login-form-homepage" class="text-decoration-none">
+    <div class="scroll-down">
+      <div class="pointer">
+        <p class="scroll-text">Get Started</p>
+        <div class="svg-container chevron">
+          <svg id="Laag_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path
+              d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<div class="col-xl-12 col-xxl-12 px-4">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Register for free to start building your collection</h1>
+      <p class="col-lg-10 fs-4">Make your own customized collections complete with pictures and detailed descriptions of
+        your prized posessions.</p>
+    </div>
+    <div id="login-form-homepage" class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 p-md-5 border rounded-3 bg-light" action="/register" method="post">
+        {% if get_flashed_messages() %}
+        <div class="alert alert-danger mb-0 text-center" role="alert">
+          {{ get_flashed_messages() | join(" ") }}
+        </div>
+        {% endif %}
+        <div class="form-floating mb-3" style="margin-top: 1rem;">
+          <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingPasswordConfirm" name="confirmation"
+            placeholder="Confirm Password">
+          <label for="floatingPasswordConfirm">Confirm Password</label>
+        </div>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+        <hr class="my-4">
+        <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

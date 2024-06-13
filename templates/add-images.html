@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add images to collection
+{% endblock %}
+
+{% block main %}
+<div class="col-xl-12 col-xxl-12 px-4">
+  <div class="row align-items-center g-lg-5">
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 p-md-5 border rounded-3 bg-light" action="/add-images/{{ collection_id }}" method="post"
+        enctype=multipart/form-data>
+
+        {% if get_flashed_messages() %}
+        <div class="alert alert-danger mb-0 text-center" role="alert" style="margin-bottom: 1rem;">
+          {{ get_flashed_messages() | join(" ") }}
+        </div>
+        {% endif %}
+
+        <div>
+          <h3>Add items to this collection</h3>
+          <div id="image-fields">
+            <div class="image-field mb-3">
+              <label for="image-file-1">Image 1:</label>
+              <input type="file" id="image-file-1" name="image_files[]" accept="image/*" required>
+              <input type="text" class="form-control" name="image_titles[]" placeholder="Image Title" required>
+              <input type="text" class="form-control" name="image_descriptions[]" placeholder="Image Description">
+            </div>
+          </div>
+
+          <ul class="text-decoration-none">
+            <li><button type="button" id="add-image-field" class="btn btn-sm btn-secondary mb-3">+ Add Another
+                Image</button></li>
+            <li><button type="submit" class="btn btn-primary">Upload</button></li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
